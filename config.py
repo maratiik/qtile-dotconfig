@@ -351,6 +351,8 @@ wmname = "LG3D"
 # Run some autostart scripts
 import os
 import subprocess
+from dotenv import load_dotenv
+import auto_trial
 
 @hook.subscribe.startup
 def run_every_startup():
@@ -358,3 +360,9 @@ def run_every_startup():
     mons_script = os.path.expanduser('~/.config/qtile/mons_script.sh')
     subprocess.call([kb_layouts_script])
     subprocess.call([mons_script])
+    
+    # auto trial script
+    load_dotenv()
+    file_path = os.path.expanduser(os.getenv('LOG'))
+    prefs_path = os.path.expanduser(os.getenv('PREFS'))
+    auto_trial.execute(file_path, prefs_path)
