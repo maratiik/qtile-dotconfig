@@ -355,4 +355,6 @@ import subprocess
 @hook.subscribe.startup
 def run_every_startup():
     kb_layouts_script = os.path.expanduser('~/.config/qtile/kb_layouts.sh')
+    mons_script = os.path.expanduser('~/.config/qtile/mons_script.sh')
     subprocess.call([kb_layouts_script])
+    subprocess.call([mons_script])
