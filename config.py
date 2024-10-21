@@ -52,7 +52,6 @@ keys = [
     Key([mod], "Right", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "Up", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "Left", lazy.layout.shuffle_left(), desc="Move window to the left"),
@@ -196,6 +195,8 @@ screens = [
                     padding_y=10,
                     urgent_border=colors['ON_1'],
                     max_title_width=150,
+                    theme_mode='preferred',
+                    theme_path="/usr/share/icons/Papirus-Dark"
                 ),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
@@ -217,8 +218,9 @@ screens = [
                 )
             ],
             30,
-            border_width=[2, 0, 0, 0],  # Draw top and bottom borders
-            border_color=[colors['ON_2'], "000000", "000000", "000000"]  # Borders are magenta
+            border_width=[0, 0, 0, 0],  # Draw top and bottom borders
+            border_color=["000000", "000000", "000000", "000000"],  # Borders are magenta
+            background='#00000000'
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
@@ -264,6 +266,8 @@ screens = [
                     padding_y=10,
                     urgent_border=colors['ON_1'],
                     max_title_width=150,
+                    theme_mode='preferred',
+                    theme_path="/usr/share/icons/Papirus-Dark"
                 ),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
@@ -288,8 +292,9 @@ screens = [
                 )
             ],
             30,
-            border_width=[2, 0, 0, 0],  # Draw top and bottom borders
-            border_color=[colors['ON_2'], "000000", "000000", "000000"]  # Borders are magenta
+            border_width=[0, 0, 0, 0],  # Draw top and bottom borders
+            border_color=["000000", "000000", "000000", "000000"],  # Borders are magenta
+            background='#00000000'
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
