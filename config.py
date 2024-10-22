@@ -188,12 +188,12 @@ screens = [
                 ),
                 widget.TaskList(
                     highlight_method='block',
-                    border=colors['ON_2'],
+                    border=['#00000000', '#00000000', colors['ON_2']],
                     rounded=False,
                     icon_size=15,
                     margin_y=-3,
                     padding_y=10,
-                    urgent_border=colors['ON_1'],
+                    urgent_border=['#00000000', '#00000000', colors['ON_1']],
                     max_title_width=150,
                     theme_mode='preferred',
                     theme_path="/usr/share/icons/Papirus-Dark"
@@ -204,8 +204,8 @@ screens = [
                 widget.Spacer(),
                 widget.Systray(),
                 widget.Volume(
-                    fmt="🎵{}",
-                    mute_format='x',
+                    fmt="♪{}",
+                    mute_format='x'
                 ),
                 widget.Battery(
                     format='⚡︎{char}{percent:1.0%}',
@@ -259,12 +259,12 @@ screens = [
                 ),
                 widget.TaskList(
                     highlight_method='block',
-                    border=colors['ON_2'],
+                    border=['#00000000', '#00000000', colors['ON_2']],
                     rounded=False,
                     icon_size=15,
                     margin_y=-3,
                     padding_y=10,
-                    urgent_border=colors['ON_1'],
+                    urgent_border=['#00000000', '#00000000', colors['ON_1']],
                     max_title_width=150,
                     theme_mode='preferred',
                     theme_path="/usr/share/icons/Papirus-Dark"
@@ -278,8 +278,11 @@ screens = [
                 #     display_map={'us': 'US', 'ru': 'RU'}
                 # ),
                 widget.Volume(
-                    fmt="🎵{}",
+                    fmt="♪{}",
                     mute_format='x'
+                    # emoji=True,
+                    # emoji_list=['🔇', '🔈', '🔉', '🔊'],
+                    # fmt='{}'
                 ),
                 widget.Battery(
                     format='⚡︎{char}{percent:1.0%}',
@@ -363,8 +366,10 @@ import auto_trial
 def run_every_startup():
     kb_layouts_script = os.path.expanduser('~/.config/qtile/kb_layouts.sh')
     mons_script = os.path.expanduser('~/.config/qtile/mons_script.sh')
+    picom_script = os.path.expanduser('~/.config/qtile/picom_script.sh')
     subprocess.call([kb_layouts_script])
     subprocess.call([mons_script])
+    subprocess.call([picom_script])
     
     # auto trial script
     load_dotenv()
