@@ -25,24 +25,27 @@
 # SOFTWARE.
 
 from libqtile import bar, layout, qtile, widget, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from groupbox_2 import GroupBox2
 
 mod = "mod4"
 terminal = "alacritty"
-wallpaper = "/home/maratik/Images/Wallpapers/wallpaperflare.com_wallpaper.jpg"
+# wallpaper = "/home/maratik/Images/Wallpapers/wallpaperflare.com_wallpaper.jpg"
+wallpaper = "/home/maratik/Images/Wallpapers/Rancho_Cucamonga_NoTree_16.png"
+
 colors = {
-    "ON_1": "ffb23b",
-    "ON_2": "cf7e00",
-    "ON_3": "613b00",
-    "ON_4": "291900",
-    "OFF_1": 'ffffff',
-    "OFF_2": "c3c3c3",
-    "OFF_3": "757575",
-    "OFF_4": "000000",
+    "ON_1": "ffffff",
+    "ON_2": "e9ecef",
+    "ON_3": "6c757d",
+    "ON_4": "495057",
+    "OFF_1": '343a40',
+    "OFF_2": "212529",
+    "OFF_3": "1b263b",
+    "OFF_4": "0d1b2a",
 }
+open_greenclip_cmd = 'rofi -modi "clipboard:greenclip print" -show clipboard -run command' + "'{cmd}'"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -98,6 +101,10 @@ keys = [
     Key([], 'XF86AudioMute', lazy.widget['volume'].mute()),
     # Keyboard layout
     # Key([mod], 'Space', lazy.widget())
+    # Screenshot selected area
+    Key([], "Print",
+        lazy.spawn("maim -s -u | xclip -selection clipboard -t image/png", shell=True)),
+    Key([mod], "v", lazy.spawn(open_greenclip_cmd))
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -115,6 +122,17 @@ for vt in range(1, 8):
 
 
 groups = [Group(i) for i in "123456789"]
+# groups.append(
+#     ScratchPad('scratchpad', [
+#         DropDown('khal',
+#         terminal + " -t ikhal -e ikhal",
+#         x=0.35,
+#         y=0.7,
+#         width=0.3,
+#         height=0.3,
+#         opacity=0.5),
+#     ])
+# )
 
 for i in groups:
     keys.extend(
@@ -158,6 +176,7 @@ screens = [
         bottom=bar.Bar(
             [
                 GroupBox2(
+            
                     highlight_method='line',
                     hide_unused=True,
                     margin_x=7,
@@ -200,7 +219,9 @@ screens = [
                 ),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
-                widget.Clock(format="%A %-d.%-m.%Y"),
+                widget.Clock(format="%H:%M %a %-d.%-m.%Y",
+                    # mouse_callbacks={'Button1': lazy.group['scratchpad'].dropdown_toggle('khal')}),
+                ),
                 widget.Spacer(),
                 widget.Systray(),
                 widget.Volume(
@@ -212,15 +233,14 @@ screens = [
                     full_char='',
                     show_short_text=False
                 ),
-                widget.Clock(format="%H:%M"),
                 widget.Spacer(
                     length=7
                 )
             ],
-            30,
+            size=30,
             border_width=[0, 0, 0, 0],  # Draw top and bottom borders
             border_color=["000000", "000000", "000000", "000000"],  # Borders are magenta
-            background='#00000000'
+            background='#ff000000'
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
@@ -271,7 +291,7 @@ screens = [
                 ),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
-                widget.Clock(format="%A %-d.%-m.%Y"),
+                widget.Clock(format="%H:%M %a %-d.%-m.%Y"),
                 widget.Spacer(),
                 # widget.KeyboardLayout(
                 #     configured_keyboards=['us', 'ru'],
@@ -289,15 +309,14 @@ screens = [
                     full_char='',
                     show_short_text=False
                 ),
-                widget.Clock(format="%H:%M"),
                 widget.Spacer(
                     length=7
                 )
             ],
-            30,
+            size=30,
             border_width=[0, 0, 0, 0],  # Draw top and bottom borders
             border_color=["000000", "000000", "000000", "000000"],  # Borders are magenta
-            background='#00000000'
+            background='#ff000000'
         ),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
